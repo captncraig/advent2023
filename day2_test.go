@@ -10,95 +10,63 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Day2P1(input string) int {
+func Day2(input string) (int, int) {
 	regBlue := regexp.MustCompile(`(\d+) blue`)
 	regRed := regexp.MustCompile(`(\d+) red`)
 	regGreen := regexp.MustCompile(`(\d+) green`)
-	tot := 0
+	tot1, tot2 := 0, 0
 	for i, l := range Lines(input) {
 		//Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 		//12 red cubes, 13 green cubes, and 14 blue cubes
 		right := strings.Split(l, ":")[1]
 		//fmt.Println(right)
 		valid := true
+		maxB, maxR, maxG := 0, 0, 0
 		for _, m := range regBlue.FindAllStringSubmatch(right, -1) {
 			n, _ := strconv.Atoi(m[1])
 			if n > 14 {
 				valid = false
-				break
+			}
+			if n > maxB {
+				maxB = n
 			}
 		}
 		for _, m := range regRed.FindAllStringSubmatch(right, -1) {
 			n, _ := strconv.Atoi(m[1])
 			if n > 12 {
 				valid = false
-				break
+			}
+			if n > maxR {
+				maxR = n
 			}
 		}
 		for _, m := range regGreen.FindAllStringSubmatch(right, -1) {
 			n, _ := strconv.Atoi(m[1])
 			if n > 13 {
 				valid = false
-				break
 			}
-		}
-
-		if valid {
-			tot += i + 1
-		}
-	}
-	return tot
-}
-
-func Day2P2(input string) int {
-	regBlue := regexp.MustCompile(`(\d+) blue`)
-	regRed := regexp.MustCompile(`(\d+) red`)
-	regGreen := regexp.MustCompile(`(\d+) green`)
-	tot := 0
-	for _, l := range Lines(input) {
-		right := strings.Split(l, ":")[1]
-		maxB := 0
-		for _, m := range regBlue.FindAllStringSubmatch(right, -1) {
-			n, _ := strconv.Atoi(m[1])
-			if n > maxB {
-				maxB = n
-			}
-		}
-		maxR := 0
-		for _, m := range regRed.FindAllStringSubmatch(right, -1) {
-			n, _ := strconv.Atoi(m[1])
-			if n > maxR {
-				maxR = n
-			}
-		}
-		maxG := 0
-		for _, m := range regGreen.FindAllStringSubmatch(right, -1) {
-			n, _ := strconv.Atoi(m[1])
 			if n > maxG {
 				maxG = n
 			}
 		}
-		power := maxB * maxG * maxR
-		tot += power
-
+		if valid {
+			tot1 += i + 1
+		}
+		tot2 += maxB * maxG * maxR
 	}
-	return tot
+	return tot1, tot2
 }
 
-func TestDay2_Ex2(t *testing.T) {
-	assert.Equal(t, Day2P2(exD2), 2286)
+func TestDay2_Examples(t *testing.T) {
+	d1, d2 := Day2(exD2)
+	assert.Equal(t, d1, 8)
+	assert.Equal(t, d2, 2286)
 }
 
-func TestDay2_Ex1(t *testing.T) {
-	assert.Equal(t, Day2P1(exD2), 8)
-}
-
-func TestDay2_P1_Actual(t *testing.T) {
-	fmt.Printf("Day 2 Part 1: %d\n", Day2P1(inputD2))
-}
-
-func TestDay2_P2_Actual(t *testing.T) {
-	fmt.Printf("Day 2 Part 2: %d\n", Day2P2(inputD2))
+func TestDay2_Actual(t *testing.T) {
+	d1, d2 := Day2(inputD2)
+	fmt.Printf("Day 2 Part 1: %d\n", d1)
+	fmt.Printf("Day 2 Part 2: %d\n", d2)
 }
 
 const exD2 = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green

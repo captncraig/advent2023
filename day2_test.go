@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,11 +17,9 @@ func Day2(input string) (int, int) {
 	for i, l := range Lines(input) {
 		//Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 		//12 red cubes, 13 green cubes, and 14 blue cubes
-		right := strings.Split(l, ":")[1]
-		//fmt.Println(right)
 		valid := true
 		maxB, maxR, maxG := 0, 0, 0
-		for _, m := range regBlue.FindAllStringSubmatch(right, -1) {
+		for _, m := range regBlue.FindAllStringSubmatch(l, -1) {
 			n, _ := strconv.Atoi(m[1])
 			if n > 14 {
 				valid = false
@@ -31,7 +28,7 @@ func Day2(input string) (int, int) {
 				maxB = n
 			}
 		}
-		for _, m := range regRed.FindAllStringSubmatch(right, -1) {
+		for _, m := range regRed.FindAllStringSubmatch(l, -1) {
 			n, _ := strconv.Atoi(m[1])
 			if n > 12 {
 				valid = false
@@ -40,7 +37,7 @@ func Day2(input string) (int, int) {
 				maxR = n
 			}
 		}
-		for _, m := range regGreen.FindAllStringSubmatch(right, -1) {
+		for _, m := range regGreen.FindAllStringSubmatch(l, -1) {
 			n, _ := strconv.Atoi(m[1])
 			if n > 13 {
 				valid = false

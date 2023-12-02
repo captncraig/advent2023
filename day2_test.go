@@ -16,37 +16,27 @@ func Day2(input string) (int, int) {
 	tot1, tot2 := 0, 0
 	for i, l := range Lines(input) {
 		//Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
-		//12 red cubes, 13 green cubes, and 14 blue cubes
-		valid := true
 		maxB, maxR, maxG := 0, 0, 0
 		for _, m := range regBlue.FindAllStringSubmatch(l, -1) {
 			n, _ := strconv.Atoi(m[1])
-			if n > 14 {
-				valid = false
-			}
 			if n > maxB {
 				maxB = n
 			}
 		}
 		for _, m := range regRed.FindAllStringSubmatch(l, -1) {
 			n, _ := strconv.Atoi(m[1])
-			if n > 12 {
-				valid = false
-			}
 			if n > maxR {
 				maxR = n
 			}
 		}
 		for _, m := range regGreen.FindAllStringSubmatch(l, -1) {
 			n, _ := strconv.Atoi(m[1])
-			if n > 13 {
-				valid = false
-			}
 			if n > maxG {
 				maxG = n
 			}
 		}
-		if valid {
+		//12 red cubes, 13 green cubes, and 14 blue cubes
+		if maxR <= 12 && maxG <= 13 && maxB <= 14 {
 			tot1 += i + 1
 		}
 		tot2 += maxB * maxG * maxR

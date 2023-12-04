@@ -7,32 +7,24 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func DayNNP1(input string) int {
+func DayNN(input string) (int, int) {
 	tot := 0
 	for _, l := range Lines(input) {
 		fmt.Println(l)
 	}
-	return tot
-}
-
-func DayNNP2(input string) int {
-	return 0
+	return tot, 0
 }
 
 func TestDayNN_Ex1(t *testing.T) {
-	assert.Equal(t, DayNNP1(exDNN), 42)
+	a, b := DayNN(exDNN)
+	assert.Equal(t, a, 42)
+	assert.Equal(t, b, 42)
 }
 
-func TestDayNN_Ex2(t *testing.T) {
-	assert.Equal(t, DayNNP2(exDNN), 42)
-}
-
-func TestDayNN_P1_Actual(t *testing.T) {
-	fmt.Printf("Day NN Part 1: %d\n", DayNNP1(inputDNN))
-}
-
-func TestDayNN_P2_Actual(t *testing.T) {
-	fmt.Printf("Day NN Part 2: %d\n", DayNNP2(inputDNN))
+func TestDayNN_Actual(t *testing.T) {
+	a, b := DayNN(inputDNN)
+	fmt.Printf("Day NN Part 1: %d\n", a)
+	fmt.Printf("Day NN Part 2: %d\n", b)
 }
 
 const exDNN = ``

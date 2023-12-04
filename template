@@ -17,8 +17,8 @@ func DayNN(input string) (int, int) {
 
 func TestDayNN_Ex1(t *testing.T) {
 	a, b := DayNN(exDNN)
-	assert.Equal(t, a, 42)
-	assert.Equal(t, b, 42)
+	assert.Equal(t, 0, a)
+	assert.Equal(t, 0, b)
 }
 
 func TestDayNN_Actual(t *testing.T) {

@@ -88,41 +88,6 @@ func TestDay11_Ex1(t *testing.T) {
 	assert.Equal(t, 8410, b)
 }
 
-// func Day11_Expand(input string) string {
-// 	newCols := map[int]bool{}
-// 	newRows := map[int]bool{}
-// 	lines := strings.Split(input, "\n")
-// 	for i, l := range lines {
-// 		newRows[i] = true
-// 		for j := range l {
-// 			newCols[j] = true
-// 		}
-// 	}
-// 	for y, l := range lines {
-// 		for x, c := range l {
-// 			if c != '.' {
-// 				newRows[y] = false
-// 				newCols[x] = false
-// 			}
-// 		}
-// 	}
-// 	newLines := []string{}
-// 	for j, l := range lines {
-// 		l2 := []byte{}
-// 		for i, b := range []byte(l) {
-// 			l2 = append(l2, b)
-// 			if newCols[i] {
-// 				l2 = append(l2, b)
-// 			}
-// 		}
-// 		newLines = append(newLines, string(l2))
-// 		if newRows[j] {
-// 			newLines = append(newLines, string(l2))
-// 		}
-// 	}
-// 	return strings.Join(newLines, "\n")
-// }
-
 func TestDay11_Actual(t *testing.T) {
 	a, b := Day11(inputD11)
 	fmt.Printf("Day 11 Part 1: %d\n", a)
